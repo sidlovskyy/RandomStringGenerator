@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{91E0E6
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomStringGenerator.Tests", "src\RandomStringGenerator.Tests\RandomStringGenerator.Tests.csproj", "{FBE7596F-2B70-4FE2-A068-A62B2173465A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +20,10 @@ Global
 		{01A28AA3-3E31-4B33-AD5B-D1D201F7FD17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01A28AA3-3E31-4B33-AD5B-D1D201F7FD17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01A28AA3-3E31-4B33-AD5B-D1D201F7FD17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE7596F-2B70-4FE2-A068-A62B2173465A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE7596F-2B70-4FE2-A068-A62B2173465A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE7596F-2B70-4FE2-A068-A62B2173465A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE7596F-2B70-4FE2-A068-A62B2173465A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
