@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{91E0E6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomStringGenerator.Tests", "src\RandomStringGenerator.Tests\RandomStringGenerator.Tests.csproj", "{FBE7596F-2B70-4FE2-A068-A62B2173465A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomStringGenerator.SampleConsole", "src\RandomStringGenerator.SampleConsole\RandomStringGenerator.SampleConsole.csproj", "{76CE67F7-9A61-4806-97DA-A9CCD36623EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{FBE7596F-2B70-4FE2-A068-A62B2173465A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBE7596F-2B70-4FE2-A068-A62B2173465A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBE7596F-2B70-4FE2-A068-A62B2173465A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76CE67F7-9A61-4806-97DA-A9CCD36623EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76CE67F7-9A61-4806-97DA-A9CCD36623EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76CE67F7-9A61-4806-97DA-A9CCD36623EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76CE67F7-9A61-4806-97DA-A9CCD36623EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
