@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -81,6 +78,42 @@ namespace RandomStringGenerator.Tests
             //assert
             invalidLengthSpecified.ShouldThrow<ArgumentException>()
                 .WithMessage("Lower boundary should be less or equals than higher");
+        }
+
+        [Test]
+        public void Generate_WithNumericCountSpecified_ShouldReturnStringWithRequiredNumericCharsCount()
+        {
+            const int numericCount = 3;
+
+            string generated = new StringGenerator().WithNumericCount(numericCount).Generate();
+
+            var numbersCount = generated.Count(char.IsDigit);
+            numbersCount.Should().Be(numericCount);
+        }
+
+        [Test]
+        public void Generate_WithNumericCountNegativeSpecified_ShouldThrowArgumentException()
+        {
+            const int numericCount = -3;
+
+            Action invalidNumericCount =
+                () => new StringGenerator().WithNumericCount(numericCount).Generate();
+
+            invalidNumericCount.ShouldThrow<ArgumentOutOfRangeException>()
+                .And.ActualValue.Should().Be(numericCount);
+        }
+
+        [Test]
+        public void Generate_WithNumericCountGreaterThenlenght_ShouldThrowInvalidOperationException()
+        {
+            const int numericCount = 5;
+            const int length = 4;
+
+            Action invalidNumericCount =
+                () => new StringGenerator().WithLength(length).WithNumericCount(numericCount).Generate();
+
+            invalidNumericCount.ShouldThrow<InvalidOperationException>()
+                .WithMessage("Numeric count should not be greater than length");
         }
     }
 }
