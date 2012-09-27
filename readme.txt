@@ -16,10 +16,8 @@ Console.WriteLine(generator.Generate());
 
 Output:
 -------------------------------------------------------
-Started.
 hPZg9lya@3fblkO
 Arkiq@vaZ75
 dyHNu5O2m#
-Done.
 
 Please let me know if you have found any issues or would like to support more configurations.
