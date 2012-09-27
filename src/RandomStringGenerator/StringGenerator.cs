@@ -11,13 +11,8 @@ namespace RandomStringGenerator
         private const int DefaultStringLengthRange = 1000;
         private const int AvailableProvidersCount = 4;
         
-        [ThreadStatic]
-        private static readonly Random Rand;
-
-        static StringGenerator()
-        {
-            Rand = new Random(DateTime.Now.Millisecond);
-        }
+		//TODO: make static
+        private readonly Random Rand = new Random(DateTime.Now.Millisecond);        
 
         private readonly Dictionary<Type, RandomCharacterProvider> _characterProviders = new Dictionary<Type, RandomCharacterProvider>();
 
@@ -38,19 +33,19 @@ namespace RandomStringGenerator
                 char[] minCharsFromProvider = provider.GetRandomChars(provider.MinCount);
                 resultChars.AddRange(minCharsFromProvider);
             }
-
+			
             while (resultChars.Count < expectedStringLength)
-            {
-                providers.RemoveAll(prvd => prvd.IsCompleted); //remove providers we cannot use more
-                if (providers.Count == 0)
-                {
-                    throw new InvalidOperationException(
-                        "Something is wrong. Please contact developer of this library. This situation should not be possible");
-                }
-
-                int randomProviderIndex = Rand.Next(0, providers.Count);
-                RandomCharacterProvider provider = providers[randomProviderIndex];
-                char rangomCharFromRandomProvider = provider.GetNextRandomChar();
+            {				
+				//remove providers we cannot use more
+				providers.RemoveAll(prvd => prvd.IsCompleted);
+				//if algorithms works correctly this should not be possible
+				if (providers.Count == 0)
+				{
+					throw new InvalidOperationException(
+						"Something is wrong. Please contact developer of this library. This situation should not be possible");
+				}
+				
+                char rangomCharFromRandomProvider = GetNextRandomChracter(providers);
                 resultChars.Add(rangomCharFromRandomProvider);                
             }
 
@@ -60,7 +55,40 @@ namespace RandomStringGenerator
 
             Debug.WriteLine("Random string generated " + result);
             return result;
-        }        
+        }
+
+		private char GetNextRandomChracter(List<RandomCharacterProvider> providers)
+		{
+			//Next algorithm works but we should normalise it by characters count in each provider
+			//int randomProviderIndex = Rand.Next(0, providers.Count);
+			//RandomCharacterProvider provider = providers[randomProviderIndex];
+			
+			//TODO: refactor this code somehow
+			List<int> providerCharacterCounts = providers.Select(prvd => prvd.Chracters.Length).ToList();
+			int allChractersCount = providerCharacterCounts.Sum();
+
+			int randomChracterIndex = Rand.Next(0, allChractersCount);
+			
+			int randomProviderIndex = -1;
+			int charactersCountSum = 0;
+			do
+			{
+				randomProviderIndex++;
+				charactersCountSum += providerCharacterCounts[randomProviderIndex];
+			}
+			while (charactersCountSum < randomChracterIndex);
+
+			RandomCharacterProvider provider = providers[randomProviderIndex];
+
+			char result = provider.GetNextRandomChar();
+			return result;
+		}
+
+		private static List<char> GetChractersProvidedBy(List<RandomCharacterProvider> providers)
+		{
+			List<char> availableCharacters = providers.SelectMany(provider => provider.Chracters).ToList();
+			return availableCharacters;
+		}        
 
         private int CalculateLength()
         {
@@ -110,7 +138,7 @@ namespace RandomStringGenerator
             return Rand.Next(lowestLengthPossible, largestLengthPossible + 1);
         }
 
-        private static int CalculateLengthIfAllProvidersAndNoLength(int totalMinPossible, int totalMaxPossible)
+        private int CalculateLengthIfAllProvidersAndNoLength(int totalMinPossible, int totalMaxPossible)
         {            
             return Rand.Next(totalMinPossible, totalMaxPossible + 1);            
         }
@@ -130,7 +158,7 @@ namespace RandomStringGenerator
             return Rand.Next(lowestLengthPossible, _expectedMaxLength + 1);            
         }
 
-        private static int CalculateLengthIfNotAllProvidersAndNoLength(int totalMinPossible)
+        private int CalculateLengthIfNotAllProvidersAndNoLength(int totalMinPossible)
         {
             return Rand.Next(totalMinPossible, totalMinPossible + DefaultStringLengthRange);
         }
