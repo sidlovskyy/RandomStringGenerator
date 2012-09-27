@@ -5,8 +5,16 @@ namespace RandomStringGenerator.CharProviders
 {
     public abstract class RandomCharacterProvider
     {
-		//TODO: make static
-        private readonly Random Rand = new Random(DateTime.Now.Millisecond);    
+        [ThreadStatic] 
+        private static Random _rand;
+
+        public Random Rand
+        {
+            get
+            {
+                return _rand ?? (_rand = new Random(DateTime.Now.Millisecond));
+            }
+        }
 
         private int _providedCharsCount;
 
