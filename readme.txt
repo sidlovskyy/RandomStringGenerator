@@ -1,4 +1,4 @@
-This library allows to generate random strings using fluent configuration.
+This library (of almost single public class :)) allows to generate random strings using fluent configuration.
 It may be used for example for random password generation.
 
 Example of code:
