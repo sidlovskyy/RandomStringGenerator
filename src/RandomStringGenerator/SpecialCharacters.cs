@@ -1,16 +1,16 @@
 ﻿namespace RandomStringGenerator
 {
-    public static class SpecialCharacters
-    {
-        public static readonly char[] DefaultSpecialCharacters = new[]
+	public static class SpecialCharacters
+	{
+		public static readonly char[] DefaultSpecialCharacters = new[]
         {
             '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', '-', '.', '/', ':', ';',
             '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~', '}', ';'
         };
 
-        public static char[] Default
-        {
-            get { return DefaultSpecialCharacters; }
-        }
-    }
+		public static char[] Default
+		{
+			get { return DefaultSpecialCharacters; }
+		}
+	}
 }
