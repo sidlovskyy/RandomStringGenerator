@@ -1,0 +1,23 @@
+name: Release
+
+on:
+  workflow_dispatch:
+      inputs:
+        tag:
+          description: 'Tag release'     
+          required: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.tag }}
+
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v1
+        
+      - name: Build project
+        run: msbuild RandomStringGenerator.sln
