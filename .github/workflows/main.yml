@@ -18,9 +18,6 @@ jobs:
       - name: setup-msbuild
         uses: microsoft/setup-msbuild@v1
         
-      - name: Build project
-        run: msbuild RandomStringGenerator.sln
-        
       - name: Build with devenv.com
         shell: cmd
         run: |
